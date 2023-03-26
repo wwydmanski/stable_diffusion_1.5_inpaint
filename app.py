@@ -8,6 +8,10 @@ from torch import autocast
 import base64
 from io import BytesIO
 from PIL import Image
+from logging import getLogger
+
+logger = getLogger(__name__)
+
 
 model_path = "runwayml/stable-diffusion-v1-5"
 inpainting_model_path = "runwayml/stable-diffusion-inpainting"
@@ -35,6 +39,8 @@ def init():
 def inference(model_inputs):
     global model
 
+    logging.info(model_inputs)
+    
     prompt = model_inputs.get('prompt', None)
     negative_prompt = model_inputs.get('negative_prompt', None)
     height = model_inputs.get('height', 512)
